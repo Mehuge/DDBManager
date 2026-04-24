@@ -1,0 +1,37 @@
+
+## --- Visual Studio / .NET Standard ---
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+## --- User Specific / Local Config ---
+# Ignore the local config folder if you are testing by 
+# copying the config.json into the build directory
+config.json
+
+## --- Project Specific ---
+# Ignore your custom Output folder
+[Oo]utput/
+
+## --- OS Generated ---
+.DS_Store
+Thumbs.db
+
+## --- Built-in VS ignore patterns ---
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+*.opendb
+*.db-shm
+*.db-wal
+
+## --- Artifacts ---
+# In case you build the Inno Setup installer into the project root
+*.exe
+*.msi
+*.zip
