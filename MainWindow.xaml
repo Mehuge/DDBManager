@@ -43,12 +43,6 @@
                             </HierarchicalDataTemplate>
                             <DataTemplate DataType="{x:Type models:BackupInstanceNode}">
                                 <DockPanel LastChildFill="True">
-                                    <TextBlock Text="{Binding SizeInBytes, Converter={StaticResource FileSizeConverter}}" 
-                                               DockPanel.Dock="Right" 
-                                               Foreground="Gray" 
-                                               FontSize="10" 
-                                               VerticalAlignment="Center"
-                                               Margin="10,0,5,0"/>
                                     <TextBlock Text="{Binding Timestamp}" VerticalAlignment="Center">
                                         <TextBlock.ContextMenu>
                                             <ContextMenu>
