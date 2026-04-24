@@ -17,12 +17,20 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0">
-            <Button Content="📁 Open Store" Click="BtnSelectStore_Click" 
-                    IsEnabled="{Binding IsProcessRunning, Converter={StaticResource InverseBoolConverter}, FallbackValue=True}"/>
-            <Separator/>
-            <TextBlock Text="{Binding StorePath}" VerticalAlignment="Center" Margin="10,0" FontStyle="Italic"/>
-        </ToolBar>
+        <StackPanel Grid.Row="0">
+            <Menu Background="White">
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About" Click="MenuAbout_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <ToolBar>
+                <Button Content="📁 Open Store" Click="BtnSelectStore_Click" 
+                IsEnabled="{Binding IsProcessRunning, Converter={StaticResource InverseBoolConverter}, FallbackValue=True}"/>
+                <Separator/>
+                <TextBlock Text="{Binding StorePath}" VerticalAlignment="Center" Margin="10,0" FontStyle="Italic"/>
+            </ToolBar>
+        </StackPanel>
 
         <TabControl Grid.Row="1" Margin="5">
             <TabItem Header="Restore Explorer">

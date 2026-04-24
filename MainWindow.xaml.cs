@@ -48,6 +48,13 @@ namespace DDBManager
             }
         }
 
+        private void MenuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            var about = new AboutWindow();
+            about.Owner = this; // Makes it center over the main app
+            about.ShowDialog(); // ShowDialog makes it a "modal" (must close it to go back)
+        }
+
         #region Profile Management
         private void BtnAddProfile_Click(object sender, RoutedEventArgs e)
         {
