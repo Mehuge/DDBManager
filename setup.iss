@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DDB Manager"
-#define MyAppVersion "0.1.1"
+#define MyAppVersion "0.2.0"
 #define MyAppPublisher "by Mehuge"
 #define MyAppURL "https://github.com/mehuge/DDBManager"
 #define MyAppExeName "DDBManager.exe"

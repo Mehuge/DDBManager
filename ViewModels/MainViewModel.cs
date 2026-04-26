@@ -52,6 +52,13 @@ namespace DDBManager.ViewModels
         public string ConsoleOutput { get => _consoleOutput; set { _consoleOutput = value; OnPropertyChanged(); } }
         public bool IsProcessRunning { get => _isProcessRunning; set { _isProcessRunning = value; OnPropertyChanged(); } }
 
+        private FileSystemNode? _selectedFile;
+        public FileSystemNode? SelectedFile
+        {
+            get => _selectedFile;
+            set { _selectedFile = value; OnPropertyChanged(); }
+        }
+
         public MainViewModel()
         {
             LoadConfig();
@@ -145,19 +152,6 @@ namespace DDBManager.ViewModels
             });
         }
 
-        // Helper for readable sizes
-        private string FormatByteSize(long bytes)
-        {
-            string[] Suffix = { "B", "KB", "MB", "GB", "TB" };
-            int i;
-            double dblSByte = bytes;
-            for (i = 0; i < Suffix.Length && bytes >= 1024; i++, bytes /= 1024)
-            {
-                dblSByte = bytes / 1024.0;
-            }
-            return $"{dblSByte:0.##} {Suffix[i]}";
-        }
-
         public void DeleteBackupInstance(BackupInstanceNode instance)
         {
             try
@@ -212,11 +206,28 @@ namespace DDBManager.ViewModels
 
             foreach (var entry in items.OrderByDescending(e => e.Type).ThenBy(e => e.Path))
             {
-                var newNode = new FileSystemNode { Name = Path.GetFileName(entry.Path), IsFolder = entry.Type == 'D', FullPath = entry.Path, Entry = entry };
-                if (newNode.IsFolder && string.IsNullOrWhiteSpace(FileFilter)) newNode.Children.Add(new FileSystemNode { Name = "Loading..." });
+                // MODIFY THIS BLOCK: Assign the CTime, MTime, and FileMode to the newNode properties
+                var newNode = new FileSystemNode
+                {
+                    Name = Path.GetFileName(entry.Path),
+                    IsFolder = entry.Type == 'D',
+                    FullPath = entry.Path,
+                    Entry = entry,
+
+                    // Bridge the gap between BackupEntry and FileSystemNode
+                    Created = entry.CTime,
+                    Modified = entry.MTime,
+                    SizeInBytes = entry.Size,
+                    Permissions = entry.FileMode.Split(':').Last() // Extracts octal like '100644'
+                };
+
+                if (newNode.IsFolder && string.IsNullOrWhiteSpace(FileFilter))
+                    newNode.Children.Add(new FileSystemNode { Name = "Loading..." });
+
                 collection.Add(newNode);
             }
         }
+
 
         public List<BackupEntry> GetFilesToRestore()
         {

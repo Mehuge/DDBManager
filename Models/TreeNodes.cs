@@ -30,6 +30,11 @@ namespace DDBManager.Models
         public BackupEntry? Entry { get; set; }
         public ObservableCollection<FileSystemNode> Children { get; } = new();
 
+        public string Permissions { get; set; } = string.Empty; // e.g., "0644"
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+        public long SizeInBytes { get; set; }
+
         public bool IsSelected
         {
             get => _isSelected;

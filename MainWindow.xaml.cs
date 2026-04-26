@@ -17,6 +17,7 @@ namespace DDBManager
     {
         private MainViewModel vm = new MainViewModel();
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -103,6 +104,14 @@ namespace DDBManager
         private async void LeftTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue is BackupInstanceNode instance) await vm.BuildFileTree(instance);
+        }
+
+        private void RightTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (DataContext is MainViewModel vm)
+            {
+                vm.SelectedFile = e.NewValue as FileSystemNode;
+            }
         }
 
         private void RightTree_Expanded(object sender, RoutedEventArgs e)
